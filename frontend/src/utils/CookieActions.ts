@@ -1,5 +1,6 @@
 import { Page } from '@playwright/test'
 import PlaywrightActions from '../playwright-utils/PlaywrightActions'
+import { Locators } from './CookieActions-Locators'
 
 class CookieActions extends PlaywrightActions{
 
@@ -12,7 +13,7 @@ class CookieActions extends PlaywrightActions{
     private constructor(page: Page) {
         super()
         this.page = page
-        this.dialogAccept = "//button[text()='Accept all']"
+        this.dialogAccept = Locators.cookieeAccept.xpath
     }
 
     async cookieAccept(page: Page) {
