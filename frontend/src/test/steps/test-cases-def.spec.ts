@@ -17,6 +17,7 @@ Before(
         try {
             browser = await chromium.launch({headless: true, channel: 'chrome'})
             context = await browser.newContext()
+            await context.tracing.start({screenshots: true, snapshots: true})
             page = await context.newPage()
             await page.waitForLoadState('load');
             Logger.debug("Page loaded successfully."); 
@@ -35,6 +36,9 @@ After(async ()=>{
     Logger.info("Initializing the closure process for test...")
     try {
         await page.waitForLoadState('load')
+        const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
+        const traceFileName = `traces-${timestamp}.zip`
+        await context.tracing.stop({ path: `./traces/${traceFileName}` })
         await page.close()
         await context.close()
         await browser.close()
