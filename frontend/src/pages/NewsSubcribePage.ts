@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 import PlaywrightActions from "../playwright-utils/PlaywrightActions";
 import { Locators } from "../xpaths/NewsSubcribePage-Locators";
-import Logger from "../utils/LoggingUtils";
+import Logger from "../../../utils/LoggingUtils";
 
 class NewsSubcribePage extends PlaywrightActions {
     private page: Page

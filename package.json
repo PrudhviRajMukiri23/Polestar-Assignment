@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "cucumber-js test"
+    "test-ui": "cucumber-js test frontend/src/test/features",
+    "test-api": "npx playwright test backend/test-cases",
+    "test-k6": "k6 run k6/scripts/script.js"
   },
   "keywords": [],
   "author": "Prudhvi Raj Mukiri",

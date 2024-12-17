@@ -4,4 +4,4 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 /traces/
-/frontend/src/logging/
+/logging/

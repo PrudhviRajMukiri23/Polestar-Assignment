@@ -1,5 +1,5 @@
 import { Page } from "@playwright/test";
-import Logger from "../utils/LoggingUtils";
+import Logger from "../../../utils/LoggingUtils";
 
 class PlaywrightActions {
 

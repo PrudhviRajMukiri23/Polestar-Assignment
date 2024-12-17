@@ -1,7 +1,7 @@
 import { Page } from "@playwright/test";
 import PlaywrightActions from "../playwright-utils/PlaywrightActions";
 import { Locators } from "../xpaths/HomePage-Locators";
-import Logger from "../utils/LoggingUtils";
+import Logger from "../../../utils/LoggingUtils";
 
 class HomePage extends PlaywrightActions {
 

@@ -3,7 +3,7 @@ import { Browser, BrowserContext, chromium, Page, expect } from '@playwright/tes
 import HomePage from '../../pages/HomePage';
 import CookieActions from '../../utils/CookieActions';
 import NewsSubcribePage from '../../pages/NewsSubcribePage'
-import Logger from '../../utils/LoggingUtils';
+import Logger from '../../../../utils/LoggingUtils';
 
 setDefaultTimeout(60*1000)
 let page: Page, browser: Browser, context: BrowserContext
