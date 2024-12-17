@@ -37,9 +37,7 @@ This project consists on the frontend test cases on the link https://www.polesta
 ### Command to run the frontend test
 
 ```
-cd frontend-tests
-
-npx playwright test
+npm test-ui
 ```
 ### Custom Execution (using tags)
 
@@ -47,7 +45,9 @@ npx playwright test
 - We can run that two specific test cases by using the tag '--grep' as shown in below command.
 
 ```
-npx playwright test --grep 'smoke'
+npm test-ui-smoke
+
+npm test-ui-regression
 ```
 
 ## Backend Test
@@ -60,9 +60,7 @@ This project consists on the backend test cases on the link https://reqres.in/
 ### Command to run the backend test
 
 ```
-cd backend-tests
-
-npx playwright test
+npm test-api
 ```
 
 ## k6-performance Test
@@ -73,18 +71,10 @@ This project consists on the k6 performance test case on the link https://www.po
 
 ### Running k6 test
 
-- We need to install k6 in our windows using below command
+- Run the below commans to run script.js for windows run
 
 ```
-winget install k6 
-```
-or manual installation from this repo: https://github.com/grafana/k6/releases
-
-- go to the path k6-performance/test-cases/scripts
-- run the below commans ro run script.js for windows run
-
-```
-k6 run script.js
+npm test-k6
 ```
 - you will see the report like this below screenshot ![alt text](readme-images/image.png)
 
@@ -97,16 +87,13 @@ k6 run script.js
 - I have integrated the github action pipeline also. pipeline-triggr.yml is provided under './github/workflows' path. I have published the artifactes and reports in pipleline.
 ![alt text](readme-images/image3.png)
 
-
-## Playwright Reports
-
-- Playwright in-built will create the reports with screenshot and video attached an we can view it in this path 'playwright-report'
-- We need to open 'index.html' with any of the browser. It will be shown as below picture:
-
-![alt text](readme-images/image2.png)
-
 ## Allure Reports
 
+- Install allure reports package using below command
+
+``` bash
+npm i allure-cucumberjs
+```
 - I am hosting the results of the test cases in the github pages.
 - As soon as the test cases ran, peaceiris/actions-gh-pages in yml file will automatically handle gh-pages to host my report
 - We can see the reports details as shown in below
