@@ -1,9 +1,9 @@
 import { Given, When, Then, Before, After, setDefaultTimeout } from '@cucumber/cucumber'
 import { Browser, BrowserContext, chromium, Page, expect } from '@playwright/test';
-import HomePage from '../../pages/HomePage';
+import HomePage from '../../src/pages/HomePage';
 import CookieActions from '../../utils/CookieActions';
-import NewsSubcribePage from '../../pages/NewsSubcribePage'
-import Logger from '../../../../utils/LoggingUtils';
+import NewsSubcribePage from '../../src/pages/NewsSubcribePage'
+import Logger from '../../../utils/LoggingUtils';
 
 setDefaultTimeout(60*1000)
 let page: Page, browser: Browser, context: BrowserContext

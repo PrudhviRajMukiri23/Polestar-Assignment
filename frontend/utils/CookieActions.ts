@@ -1,6 +1,6 @@
 import { Page } from '@playwright/test'
-import PlaywrightActions from '../playwright-utils/PlaywrightActions'
-import { Locators } from '../xpaths/CookieActions-Locators'
+import PlaywrightActions from '../src/playwright-utils/PlaywrightActions'
+import { Locators } from '../src/xpaths/CookieActions-Locators'
 
 class CookieActions extends PlaywrightActions{
 
