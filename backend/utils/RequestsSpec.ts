@@ -1,9 +1,9 @@
 import Logger from '../../utils/LoggingUtils'
-import { APIRequestContext } from '@playwright/test'
+import {APIRequestContext} from '@playwright/test'
 
 class RequestsSpec {
 
-    async get(url: string, request) {
+    async get(url: string, request: APIRequestContext) {
         try {
             Logger.info(`Starting GET request for ${url}`)
             const response = await request.get(url)
@@ -15,7 +15,7 @@ class RequestsSpec {
         }
     }
 
-    async post(url: string, request) {
+    async post(url: string, request: APIRequestContext) {
         try {
             Logger.info(`Starting POST request for ${url}`)
             const response = await request.post(url, {
@@ -35,7 +35,7 @@ class RequestsSpec {
         }
     }
 
-    async put(url: string, request) {
+    async put(url: string, request: APIRequestContext) {
         try {
             Logger.info(`Starting PUT request for ${url}`)
             const response = await request.put(url, {
@@ -55,7 +55,7 @@ class RequestsSpec {
         }
     }
 
-    async delete(url: string, request) {
+    async delete(url: string, request: APIRequestContext) {
         try {
             Logger.info(`Starting DELETE request for ${url}`)
             const response = await request.delete(url)
