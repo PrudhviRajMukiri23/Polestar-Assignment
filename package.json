@@ -13,5 +13,9 @@
     "@cucumber/cucumber": "^11.1.1",
     "@playwright/test": "^1.49.1",
     "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "moment-timezone": "^0.5.46",
+    "winston": "^3.17.0"
   }
 }
