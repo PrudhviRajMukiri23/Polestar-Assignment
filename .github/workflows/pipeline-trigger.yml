@@ -57,7 +57,7 @@ jobs:
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: test-results/json-reports
   API_tests:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Checkout main branch'
         uses: actions/checkout@v3
