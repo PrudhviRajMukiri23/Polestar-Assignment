@@ -5,7 +5,7 @@
         },
         "paths": [ "frontend/test/features/" ],
         "dryRun": false,
-        "require": [ "frontend/test/steps/*.spec.ts" ],
+        "require": [ "frontend/test/steps/*.spec.ts", "frontend/test/hooks/hooks.ts" ],
         "requireModule": [
             "ts-node/register"
         ],
