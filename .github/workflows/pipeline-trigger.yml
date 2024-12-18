@@ -50,13 +50,6 @@ jobs:
             traces
             logging
         if: always()
-      - name: Deploy reports to GitHub Pages
-        if: always()
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          PERSONAL_TOKEN: ${{ secrets.GH_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: test-results/json-reports
   API_tests:
     runs-on: ubuntu-latest
     steps:
