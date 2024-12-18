@@ -14,7 +14,7 @@ on:
 
 jobs:
   UI_tests:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Checkout main branch'
         uses: actions/checkout@v3
@@ -83,7 +83,7 @@ jobs:
             logging
         if: always()
   K6_tests:
-    run-on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps:
       - name: 'Checkout main branch'
         uses: actions/checkout@v3
