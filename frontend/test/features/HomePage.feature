@@ -14,6 +14,6 @@ Feature: Home Page Functionality Checks
     @Smoke @Regression
     Scenario: Verify the Ready For Delivery button functionality
         Given User should be on home page with title 'Polestar – Elbilar | Polestar Sverige'
-        And Able to see 'Leveransklara bilar' button
-        When User click on the 'Leveransklara bilar' button
+        And Able to see 'Tillgängliga bilar' button
+        When User click on the 'Tillgängliga bilar' button
         Then User should land on page with title 'Förkonfigurerade Polestar-bilar för snabb leverans | Polestar Sverige'
