@@ -67,7 +67,7 @@ When('User click on the {string} button', async function (string: string) {
             Logger.debug("Clicking on Discover button.")
             await pageFixture.homePageInstance.clickOnDiscoverButton(string)
             Logger.info("Clicked on Discover button.")
-        } else if (string.includes('Leveransklara bilar')) {
+        } else if (string.includes('Tillgängliga bilar')) {
             Logger.debug("Clicking on Ready for Delivery button.")
             await pageFixture.homePageInstance.clickOnReadyForDeliveryButton(string)
             Logger.info("Clicked on Ready for Delivery button.")

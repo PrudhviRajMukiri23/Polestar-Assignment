@@ -6,6 +6,7 @@ class PlaywrightActions {
     async getPageTitle(page: Page) {
         try {
             Logger.debug("Waiting for 3 seconds before getting page title...")  
+            await page.waitForLoadState('load')
             await page.waitForTimeout(3000)
             let title = await page.title()
             Logger.info(`Successfully retrieved page title: ${title}`) 
