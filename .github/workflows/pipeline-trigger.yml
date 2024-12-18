@@ -36,6 +36,7 @@ jobs:
         run: npm run test-ui:failed
         env:
           CI: 'true'
+        if: failure()
       - name: 'Generate reports'
         run: npm run ui-report-gen
         env:
