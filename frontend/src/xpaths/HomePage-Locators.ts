@@ -4,7 +4,7 @@ export class Locators {
         decription: "Discover button on home page"
     }
     readyForDelivery = {
-        xpath: "//a[@data-testid='not-gatsby-link' and starts-with(@href, '/se/preconfigured-cars/polestar-4/')]/descendant::span[contains(text(),'Leveransklara bilar')]",
+        xpath: "//a[@data-testid='not-gatsby-link' and starts-with(@href, '/se/preconfigured-cars/polestar-4')]/descendant::span[contains(text(),'Tillgängliga bilar')]",
         decription: "Vehicles ready for delivery button on home page"
     }
     subcribeNewsLetter = {
