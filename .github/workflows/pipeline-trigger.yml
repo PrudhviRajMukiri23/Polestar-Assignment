@@ -23,7 +23,7 @@ jobs:
       - name: 'Setup Node.js'
         uses: actions/setup-node@v3
         with:
-          node-version: '16'
+          node-version: '22'
       - name: 'Install dependencies'
         run: npm install
       - name: 'Install Playwright browsers'
@@ -69,8 +69,6 @@ jobs:
           node-version: '16'
       - name: 'Install dependencies'
         run: npm install
-      - name: 'Install Playwright browsers'
-        run: npx playwright install --with-deps
       - name: 'Run API tests'
         run: npm run test-api
         env:
@@ -95,8 +93,8 @@ jobs:
           node-version: '16'
       - name: 'Install dependencies'
         run: npm install
-      - name: 'Install Playwright browsers'
-        run: npx playwright install --with-deps
+      - name: 'Install K6'
+        uses: grafana/setup-k6-action@v1
       - name: 'Run K6 tests'
         run: npm run test-k6
         env:
