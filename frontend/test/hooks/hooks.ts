@@ -1,57 +1,78 @@
-import { Before, After } from '@cucumber/cucumber';
-import { chromium, Page, Browser, BrowserContext } from '@playwright/test';
-import { pageFixture } from './PageFixture';
-import HomePage from '../../src/pages/HomePage';
-import CookieActions from '../../utils/CookieActions';
-import NewsSubcribePage from '../../src/pages/NewsSubcribePage';
-import Logger from '../../../utils/LoggingUtils';
+import { Before, After, BeforeAll, AfterAll, Status } from '@cucumber/cucumber'
+import { chromium, Page, Browser, BrowserContext } from '@playwright/test'
+import { pageFixture } from './PageFixture'
+import HomePage from '../../src/pages/HomePage'
+import CookieActions from '../../utils/CookieActions'
+import NewsSubcribePage from '../../src/pages/NewsSubcribePage'
+import Logger from '../../../utils/LoggingUtils'
 
-let page: Page, browser: Browser, context: BrowserContext;
+let page: Page, browser: Browser, context: BrowserContext
+const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
+
+BeforeAll(async function () {
+    Logger.debug('Before All hook: Starting browser...') 
+    try {
+        browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
+        Logger.info('Browser successfully created.')
+    } catch (error) {
+        Logger.error(`Error during before all hook setup: ${error.message}`)
+        throw error
+    }
+})
+
+AfterAll(async function () {
+    Logger.debug('After all hook: Performing cleanup...')
+    try {
+        await browser.close()
+        Logger.info('Browser successfully closed.')
+    } catch (error) {
+        Logger.error(`Error during cleanup before all hook: ${error.message}`)
+        throw error
+    } 
+})
 
 Before(async function () {
-    Logger.debug('Before hook: Starting browser and context setup...');
-
+    Logger.debug('Before hook:context setup...')
     try {
-        browser = await chromium.launch({ headless: false, channel: 'chrome' });
-        context = await browser.newContext();
-        Logger.info('Browser and context successfully created.');
+        context = await browser.newContext()
+        Logger.info('Context successfully created.')
 
-        await context.tracing.start({ screenshots: true, snapshots: true });
-        page = await context.newPage();
-        pageFixture.page = page;
+        await context.tracing.start({ screenshots: true, snapshots: true })
+        page = await context.newPage()
+        pageFixture.page = page
 
-        pageFixture.homePageInstance = new HomePage(pageFixture.page);
-        pageFixture.cookiePageInstance = CookieActions.getInstance(pageFixture.page);
-        pageFixture.newsSubcribePageInstance = new NewsSubcribePage(pageFixture.page);
+        pageFixture.homePageInstance = new HomePage(pageFixture.page)
+        pageFixture.cookiePageInstance = CookieActions.getInstance(pageFixture.page)
+        pageFixture.newsSubcribePageInstance = new NewsSubcribePage(pageFixture.page)
 
-        Logger.info('Page instances (HomePage, CookieActions, NewsSubcribePage) initialized.');
+        Logger.info('Page instances (HomePage, CookieActions, NewsSubcribePage) initialized.')
     } catch (error) {
-        Logger.error(`Error during browser setup: ${error.message}`);
-        throw error;
+        Logger.error(`Error during before hook setup: ${error.message}`)
+        throw error
     }
-});
+})
 
-After(async function () {
-    Logger.debug('After hook: Performing cleanup...');
-
+After(async function ({pickle, result}) {
+    Logger.debug('After hook: Performing cleanup...')
     try {
-        await pageFixture.page.waitForLoadState('load');
-        Logger.debug('Page fully loaded, stopping tracing...');
-        
-        const timestamp = new Date().toISOString().replace(/[:.-]/g, '_');
-        const traceFileName = `traces-${timestamp}.zip`;
+        await pageFixture.page.waitForLoadState('load')
+        if(result.status == Status.FAILED) {
+            const img = await pageFixture.page.screenshot({path: `./test-results/screenshots/${pickle.name}-${timestamp}`, type: 'png'}) // pickle is scenario component
+            await this.attach(img, 'img/png') // attach img to cucumber
+            Logger.debug('screenshot taken successfully for failed scenario...')
+        }
+        Logger.debug('stoping trace...')
+        const traceFileName = `traces-${timestamp}.zip`
+        await context.tracing.stop({ path: `./traces/${traceFileName}` })
+        Logger.info(`Tracing stopped and saved as ${traceFileName}.`)
 
-        await context.tracing.stop({ path: `./traces/${traceFileName}` });
-        Logger.info(`Tracing stopped and saved as ${traceFileName}.`);
+        await pageFixture.page.close()
+        await page.close()
+        await context.close()
 
-        await pageFixture.page.close();
-        await page.close();
-        await context.close();
-        await browser.close();
-
-        Logger.info('Browser, context, and page successfully closed.');
+        Logger.info('Context and page successfully closed.')
     } catch (error) {
-        Logger.error(`Error during cleanup: ${error.message}`);
-        throw error;
+        Logger.error(`Error during cleanup in before hook: ${error.message}`)
+        throw error
     }
-});
+})

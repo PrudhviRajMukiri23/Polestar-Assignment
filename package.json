@@ -7,7 +7,9 @@
     "test-api": "npx playwright test backend/test",
     "test-k6": "k6 run k6/scripts/script.js",
     "test-ui-smoke": "cucumber-js test --tags @Smoke frontend/test/features",
-    "test-ui-regression": "cucumber-js test --tags @Regression frontend/test/features"
+    "test-ui-regression": "cucumber-js test --tags @Regression frontend/test/features",
+    "ui-report-gen": "npx ts-node frontend/utils/ReportsGenerator.ts",
+    "test-ui:failed": "cucumber-js test -p rerun @rerun.txt"
   },
   "keywords": [],
   "author": "Prudhvi Raj Mukiri",
@@ -16,6 +18,7 @@
   "devDependencies": {
     "@cucumber/cucumber": "^11.1.1",
     "@playwright/test": "^1.49.1",
+    "multiple-cucumber-html-reporter": "^3.8.0",
     "ts-node": "^10.9.2"
   },
   "dependencies": {

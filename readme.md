@@ -10,6 +10,7 @@
 - playwright (install typescript) [https://www.npmjs.com/package/playwright]
 - cucumber [https://www.npmjs.com/package/@cucumber/cucumber/v/9.5.1]
 - cucumber plugin in vscode [https://marketplace.visualstudio.com/items?itemName=CucumberOpen.cucumber-official]
+- multiple cucumber html reporter [https://github.com/WasiqB/multiple-cucumber-html-reporter]
 - ts-node [https://www.npmjs.com/package/node-ts]
 
 ### Actions Points Covered

@@ -13,7 +13,27 @@
             "progress-bar",
             "html:test-results/cucumber-report.html",
             "json:test-results/cucumber-report.json",
-            "summary"
+            "summary",
+            "rerun:@rerun.txt"
+        ],
+        "parallel" : 2,
+        "retry" : 1
+    },
+    "rerun": {
+        "formatOptions" : {
+            "snippetInterface" : "async-await"
+        },
+        "dryRun": false,
+        "require": [ "frontend/test/steps/*.spec.ts", "frontend/test/hooks/hooks.ts" ],
+        "requireModule": [
+            "ts-node/register"
+        ],
+        "format": [
+            "progress-bar",
+            "html:test-results/cucumber-report.html",
+            "json:test-results/cucumber-report.json",
+            "summary",
+            "rerun:@rerun.txt"
         ],
         "parallel" : 2
     }
