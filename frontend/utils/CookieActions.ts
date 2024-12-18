@@ -6,19 +6,19 @@ class CookieActions extends PlaywrightActions{
 
     private static instance: CookieActions | null = null
 
-    private dialogAccept: string
-
     private page: Page
+
+    private locators: Locators
 
     private constructor(page: Page) {
         super()
         this.page = page
-        this.dialogAccept = Locators.cookieeAccept.xpath
+        this.locators = new Locators()
     }
 
     async cookieAccept(page: Page) {
-        await page.waitForSelector(this.dialogAccept, { timeout: 5000, state: 'visible' })
-        await this.clickOnLocator(page, this.dialogAccept)
+        await page.waitForSelector(this.locators.cookieeAccept.xpath, { timeout: 5000, state: 'visible' })
+        await this.clickOnLocator(page, this.locators.cookieeAccept.xpath)
         await page.waitForTimeout(2000)
     }
 

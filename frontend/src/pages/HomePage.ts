@@ -1,15 +1,17 @@
 import { Page } from "@playwright/test";
 import PlaywrightActions from "../playwright-utils/PlaywrightActions";
-import { Locators } from "../xpaths/HomePage-Locators";
 import Logger from "../../../utils/LoggingUtils";
+import { Locators } from "../xpaths/HomePage-Locators";
 
 class HomePage extends PlaywrightActions {
 
     private page: Page | null
+    private locators: Locators
 
     constructor(page: Page) {
         super()
         this.page = page
+        this.locators = new Locators()
     }
 
     async navigateHomeUrl(url: string) {
@@ -23,7 +25,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async isDiscoverButtonVisible(text: string) {
-        const value = Locators.discoverButton.xpath
+        const value = this.locators.discoverButton.xpath
         Logger.debug(`Checking visibility of the 'Discover' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
@@ -41,7 +43,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async clickOnDiscoverButton(text: string) {
-        const value = Locators.discoverButton.xpath
+        const value = this.locators.discoverButton.xpath
         Logger.debug(`Attempting to click on 'Discover' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
@@ -58,7 +60,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async isReadyForDeliveryButtonVisible(text: string) {
-        const value = Locators.readyForDelivery.xpath
+        const value = this.locators.readyForDelivery.xpath
         Logger.debug(`Checking visibility of 'Ready for Delivery' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
@@ -76,7 +78,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async clickOnReadyForDeliveryButton(text: string) {
-        const value = Locators.readyForDelivery.xpath
+        const value = this.locators.readyForDelivery.xpath
         Logger.debug(`Attempting to click on 'Ready for Delivery' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
@@ -93,7 +95,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async isSubscribeButtonVisible(text: string) {
-        const value = Locators.subcribeNewsLetter.xpath
+        const value = this.locators.subcribeNewsLetter.xpath
         Logger.debug(`Checking visibility of 'Subscribe' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
@@ -111,7 +113,7 @@ class HomePage extends PlaywrightActions {
     }
 
     async clickOnSubcribeNewsButton(text: string) {
-        const value = Locators.subcribeNewsLetter.xpath
+        const value = this.locators.subcribeNewsLetter.xpath
         Logger.debug(`Attempting to click on 'Subscribe' button with text: ${text}`);  
         if(value.includes(text)) {
             try {
