@@ -1,0 +1,105 @@
+name: Test Suite
+on:
+  schedule:
+    - cron: '30 3,11 * * *'
+    # 9:00 AM IST is 3:30 AM UTC.
+    # 5:00 PM IST is 11:30 AM UTC.
+  push:
+    branches:
+      - main
+  pull_request:
+    branch:
+      - main
+  workflow_dispatch:
+
+jobs:
+  UI_tests:
+    run-on: ubuntu-latest
+      steps:
+        - name: 'Checkout main branch'
+          uses: actions/checkout@v3
+          with:
+            ref: 'main'
+        - name: 'Setup Node.js'
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: 'Install dependencies'
+          run: npm install
+        - name: 'Install Playwright browsers'
+          run: npx playwright install --with-deps
+        - name: 'Run UI tests'
+          run: npm run test-ui
+          env:
+            CI: 'true'
+        - name: 'Rerun UI tests'
+          run: npm run test-ui:failed
+          env:
+            CI: 'true'
+        - name: 'Generate reports'
+          run: npm run ui-report-gen
+          env:
+            CI: 'true'
+        - name: 'Upload a Build Artifact'
+          uses: actions/upload-artifact@v4.4.3
+          with:
+            name: ui-artifact
+            path: |
+              test-results
+              traces
+              logging
+          if: always()
+        - name: Deploy reports to GitHub Pages
+          if: always()
+          uses: peaceiris/actions-gh-pages@v3
+          with:
+            PERSONAL_TOKEN: ${{ secrets.GH_TOKEN }}
+            PUBLISH_BRANCH: gh-pages
+            PUBLISH_DIR: test-results/json-reports
+  API_tests:
+    run-on: ubuntu-latest
+      steps:
+        - name: 'Checkout main branch'
+          uses: actions/checkout@v3
+          with:
+            ref: 'main'
+        - name: 'Setup Node.js'
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: 'Install dependencies'
+          run: npm install
+        - name: 'Install Playwright browsers'
+          run: npx playwright install --with-deps
+        - name: 'Run API tests'
+          run: npm run test-api
+          env:
+            CI: 'true'
+        - name: 'Upload a Build Artifact'
+          uses: actions/upload-artifact@v4.4.3
+          with:
+            name: api-artifact
+            path: |
+              logging
+          if: always()
+  K6_tests:
+    run-on: ubuntu-latest
+      steps:
+        - name: 'Checkout main branch'
+          uses: actions/checkout@v3
+          with:
+            ref: 'main'
+        - name: 'Setup Node.js'
+          uses: actions/setup-node@v3
+          with:
+            node-version: '16'
+        - name: 'Install dependencies'
+          run: npm install
+        - name: 'Install Playwright browsers'
+          run: npx playwright install --with-deps
+        - name: 'Run K6 tests'
+          run: npm run test-k6
+          env:
+            CI: 'true'
+            
+        
