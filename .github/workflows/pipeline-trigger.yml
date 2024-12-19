@@ -50,6 +50,12 @@ jobs:
             traces
             logging
         if: always()
+      - name: Create gh-pages branch if it doesn't exist
+        run: |
+          git fetch origin gh-pages || git checkout --orphan gh-pages
+          git rm -rf .  # Remove existing files (if any)
+          git commit --allow-empty -m "Reports commit to gh-pages"
+          git push origin gh-pages
       - name: Publish Report per branch
         uses: mgrybyk-org/html-trend-report-action@v1.2.2
         with:
@@ -57,7 +63,6 @@ jobs:
           gh_pages: gh_pages
           report_dir: './test-results/json-reports/'
           report_type: html
-          
   API_tests:
     runs-on: ubuntu-latest
     steps:
