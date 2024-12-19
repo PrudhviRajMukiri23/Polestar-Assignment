@@ -50,16 +50,6 @@ jobs:
             traces
             logging
         if: always()
-      - name: Configure Git user
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-      - name: Create gh-pages branch if it doesn't exist
-        run: |
-          git fetch origin gh-pages || git checkout --orphan gh-pages
-          git rm -rf .  # Remove existing files (if any)
-          git commit --allow-empty -m "Reports commit to gh-pages"
-          git push origin gh-pages
       - name: Publish Report per branch
         uses: mgrybyk-org/html-trend-report-action@v1.2.2
         with:
