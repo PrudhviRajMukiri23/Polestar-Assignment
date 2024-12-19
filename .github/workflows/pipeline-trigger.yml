@@ -54,7 +54,7 @@ jobs:
         uses: mgrybyk-org/html-trend-report-action@v1.2.2
         with:
           report_id: UI Test Report
-          gh_pages: gh_pages
+          gh_pages: gh-pages
           report_dir: './test-results/json-reports/'
           report_type: html
   API_tests:
