@@ -15,18 +15,13 @@
 
 ### Actions Points Covered
 
-1. Added the **frontend**, **backend** and **k6-performance** test cases.
-2. Implemented in **Page Object Model**.
-3. Implemented **Behavioral-Driven** Test cases.
-4. Implemented **Module** based test execution.
-5. Implemented **Singleton class** file.
-5. Handled the **parallel** execution.
-6. configured **azure & gitHub Actions yaml** with reports and artifacts publish feature.
-8. Handled **cross browser testing** (chromium, firefox were enabled, we can run in any other browsers too as per our business requirement).
-9. **Reports** generation in pipeline.
-10. Recording **video and Screenshot** in pipeline.
-11. **Tracing** the testcase ran in pipeline.
-12. Custom **logging** in UI test case and **Error handling** in BE test cases.
+1. Added the **frontend**, **backend** and **k6** test cases.
+2. Implemented in **Page Object Model** and **Behavioral-Driven**.
+3. Implemented **Singleton class** file to serve single instance at at time.
+4. Handled the **parallel** execution.
+5. configured **gitHub Actions yaml** with artifacts publish feature.
+6. **Reports** and **traces** generated and published in pipeline.
+7. Custom **logging** and **Error handling** were implemented.
 
 ## Frontend Tests
 
@@ -51,12 +46,35 @@ npm test-ui-smoke
 npm test-ui-regression
 ```
 
+### Retry Execution of faied tests
+
+- I have included the retry mechanism to rety the failed test cases in local as well as pipeline
+- command to achieve running of failed test cases
+
+```
+npm run test-ui:failed
+```
+
+### Custom reports generation
+
+- I have included the utility file to parse the cucumber report with custom data and pie-charts
+- command to achieve custom reports of UI test cases
+- It will generate _index.html_ report file under _test-results_ folder
+
+```
+ui-report-gen
+```
+![alt text](readme-images/image.png)
+![alt text](readme-images/image-1.png)
+![alt text](readme-images/image-2.png)
+
 ## Backend Test
 
 This project consists on the backend test cases on the link https://reqres.in/
 
 - Implemented the test cases with GET, POST, PUT and DELETE http methods.
-- Implemented the request specifications in RequestSpec.js file in utils.
+- Implemented the request specifications in RequestSpec.ts file in utils.
+- In RequestSpec.ts file we can customize the request specifications.
 
 ### Command to run the backend test
 
@@ -77,38 +95,20 @@ This project consists on the k6 performance test case on the link https://www.po
 ```
 npm test-k6
 ```
-- you will see the report like this below screenshot ![alt text](readme-images/image.png)
-
-## Azure pipeline set-up
-
-- I have configured the pipeline stages in such a way that the playwright test can run in the azure pipeline and the json report & artifacts will be published as well. We can find it in azure-pipeline.yml file
+![alt text](<readme-images/image copy.png>)
 
 ## GitHub Actions
 
 - I have integrated the github action pipeline also. pipeline-triggr.yml is provided under './github/workflows' path. I have published the artifactes and reports in pipleline.
-![alt text](readme-images/image3.png)
 
-## Allure Reports
-
-- Install allure reports package using below command
-
-``` bash
-npm i allure-cucumberjs
-```
-- I am hosting the results of the test cases in the github pages.
-- As soon as the test cases ran, peaceiris/actions-gh-pages in yml file will automatically handle gh-pages to host my report
-- We can see the reports details as shown in below
-![alt text](readme-images/image-5.png)
-![alt text](readme-images/image-6.png)
+![alt text](readme-images/image-3.png)
 
 ## Playwright Traces
 
 - I have included the amazing feature of playwright i.e., playwright traces.
 - We can find it in following path 'traces'
 - files will get saved with time date and test case number.
-- In pipeline we can download traces from the artifacts and view the traces as shown below.
-
-![alt text](readme-images/image4.png)
+- In pipeline we can download traces from the artifacts and view the traces.
 
 ### Playwright Traces View
 
@@ -120,6 +120,7 @@ npm i allure-cucumberjs
     ```
     npx playwright show-trace <tracefilename.zip>
     ```  
+![alt text](readme-images/image4.png)
 
 ### Custom logging and Error Handling
 
@@ -130,21 +131,28 @@ npm i allure-cucumberjs
 
     npm i moment-timezone
     ```  
-- All UI test cases use the generic logging util file and log in console, and _test_run.log_ file under Logging folder.
-- I ahve used _ErrorHandler_ for BE test cases to handled any unexpected error while interacting api's.
+- All test cases use the generic logging util file and log in console, and test_run.log_ file under Logging folder.
+- I have used _ErrorHandler_ for BE test cases to handled any unexpected error while interacting api's.
 
 - ref: 
   winston - logging [https://www.npmjs.com/package/winston]
   
   time zone - moment timezone [https://www.npmjs.com/package/moment-timezone]
 
+  ![alt text](readme-images/image-4.png)
+  ![alt text](readme-images/image-5.png)
+  ![alt text](readme-images/image-6.png)
+
 ### Tech stack used
 
 - Node.js
 - Playwright
 - JavaScript
+- TypeScript
 - k6
-- yaml 
+- yaml
+- Cucumber
+- Gherkin
 
 
 
