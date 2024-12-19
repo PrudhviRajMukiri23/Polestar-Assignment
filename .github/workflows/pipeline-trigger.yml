@@ -50,15 +50,6 @@ jobs:
             traces
             logging
         if: always()
-      - name: Set up and push to gh-pages
-        run: |
-          git config --global user.name "GitHub Actions"
-          git config --global user.email "actions@github.com"
-          git remote set-url origin https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}
-          git fetch origin gh-pages || git checkout --orphan gh-pages
-          git rm -rf .
-          git commit --allow-empty -m "Initial commit to gh-pages"
-          git push --set-upstream origin gh-pages
       - name: Publish Report per branch
         uses: mgrybyk-org/html-trend-report-action@v1.2.2
         with:
