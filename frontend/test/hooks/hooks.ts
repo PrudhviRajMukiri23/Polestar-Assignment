@@ -13,7 +13,7 @@ const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
 BeforeAll(async function () {
     Logger.debug('Before All hook: Starting browser...') 
     try {
-        if(process.env.LOCALRUN) {
+        if(process.env.LOCALBROWSER) {
             Logger.debug('Running test in local environment...')
             browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
         } else {

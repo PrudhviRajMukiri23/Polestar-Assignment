@@ -26,21 +26,28 @@ jobs:
           node-version: '22'
       - name: 'Install dependencies'
         run: npm install
+        env:
+          LOCALBROWSER: 'true'
       - name: 'Install Playwright browsers'
         run: npx playwright install --with-deps
+        env:
+          LOCALBROWSER: 'true'
       - name: 'Run UI tests'
         run: npm run test-ui
         env:
           CI: 'true'
+          LOCALBROWSER: 'true'
       - name: 'Rerun UI tests'
         run: npm run test-ui:failed
         env:
           CI: 'true'
+          LOCALBROWSER: 'true'
         if: failure()
       - name: 'Generate reports'
         run: npm run ui-report-gen
         env:
           CI: 'true'
+          LOCALBROWSER: 'true'
       - name: 'Upload a Build Artifact'
         uses: actions/upload-artifact@v4.4.3
         with:

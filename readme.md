@@ -33,7 +33,7 @@ This project consists on the frontend test cases on the link https://www.polesta
 
 ### Command to run the frontend test in local
 
-Note: Make sure that "LOCAL" environment value as true.
+Note: Make sure that "LOCALBROWSER" environment value as true.
 
 ```
 npm test-ui
@@ -52,7 +52,7 @@ npm test-ui-regression
 ### Custom Execution in Browserstack environment
 
 - I have included the utility and feature to execute my test cases in browser stack environment.
-- We can execute the test cases in browser stack by setting environment variable "LOCAL" as false.
+- We can execute the test cases in browser stack by setting environment variable "LOCALBROWSER" as false.
 - We need to provide "BROWSERSTACK_USERNAME" and "BROWSERSTACK_ACCESS_KEY" environment values in order to run in browser stack.
 
 ![alt text](readme-images/image-7.png)
