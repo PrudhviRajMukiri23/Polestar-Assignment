@@ -5,6 +5,7 @@ import HomePage from '../../src/pages/HomePage'
 import CookieActions from '../../utils/CookieActions'
 import NewsSubcribePage from '../../src/pages/NewsSubcribePage'
 import Logger from '../../../utils/LoggingUtils'
+import getwsEndpoint from '../../utils/BrowserStackConfig'
 
 let page: Page, browser: Browser, context: BrowserContext
 const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
@@ -12,8 +13,16 @@ const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
 BeforeAll(async function () {
     Logger.debug('Before All hook: Starting browser...') 
     try {
-        browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
-        Logger.info('Browser successfully created.')
+        if(process.env.LOCALRUN) {
+            Logger.debug('Running test in local environment...')
+            browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
+        } else {
+            Logger.debug('Running test in browserstack environment...')
+            browser = await chromium.connect({
+            wsEndpoint: getwsEndpoint()
+            })
+        }
+    Logger.info('Browser successfully created.')
     } catch (error) {
         Logger.error(`Error during before all hook setup: ${error.message}`)
         throw error
@@ -67,7 +76,6 @@ After(async function ({pickle, result}) {
         Logger.info(`Tracing stopped and saved as ${traceFileName}.`)
 
         await pageFixture.page.close()
-        await page.close()
         await context.close()
 
         Logger.info('Context and page successfully closed.')

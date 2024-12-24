@@ -22,6 +22,7 @@
 5. configured **gitHub Actions yaml** with artifacts publish feature.
 6. **Reports** and **traces** generated and published in pipeline.
 7. Custom **logging** and **Error handling** were implemented.
+8. Implemented the feature to run test in **browserstack**.
 
 ## Frontend Tests
 
@@ -30,7 +31,9 @@ This project consists on the frontend test cases on the link https://www.polesta
 - Validated the testcases to test the discover and ready for delivery links check.
 - Validated the subcription of news process for Polestar.
 
-### Command to run the frontend test
+### Command to run the frontend test in local
+
+Note: Make sure that "LOCAL" environment value as true.
 
 ```
 npm test-ui
@@ -45,6 +48,14 @@ npm test-ui-smoke
 
 npm test-ui-regression
 ```
+
+### Custom Execution in Browserstack environment
+
+- I have included the utility and feature to execute my test cases in browser stack environment.
+- We can execute the test cases in browser stack by setting environment variable "LOCAL" as false.
+- We need to provide "BROWSERSTACK_USERNAME" and "BROWSERSTACK_ACCESS_KEY" environment values in order to run in browser stack.
+
+![alt text](readme-images/image-7.png)
 
 ### Retry Execution of faied tests
 
