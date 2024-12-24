@@ -14,10 +14,10 @@ BeforeAll(async function () {
     Logger.debug('Before All hook: Starting browser...') 
     try {
         if(process.env.LOCALBROWSER) {
-            Logger.debug('Running test in local environment...')
+            Logger.debug('Running test in local browser...')
             browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
         } else {
-            Logger.debug('Running test in browserstack environment...')
+            Logger.debug('Running test in browserstack browser...')
             browser = await chromium.connect({
             wsEndpoint: getwsEndpoint()
             })
