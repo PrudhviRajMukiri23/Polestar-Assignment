@@ -6,11 +6,11 @@ import CookieActions from '../../utils/CookieActions'
 import NewsSubcribePage from '../../src/pages/NewsSubcribePage'
 import Logger from '../../../utils/LoggingUtils'
 import getwsEndpointBrowserStack from '../../utils/BrowserStackConfig'
-import getwsEndpointLambdaTest from '../../utils/LambdaTEstConfig'
+import getwsEndpointLambdaTest from '../../utils/LambdaTestConfig'
 
 let page: Page, browser: Browser, context: BrowserContext
 const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
-var browserPlatform = 'LambdaTest'
+var browserPlatform = process.env.BROWSERPLATFORM // || 'BrowserStack' || 'LambdaTest'
 
 BeforeAll(async function () {
     Logger.debug('Before All hook: Starting browser...') 
