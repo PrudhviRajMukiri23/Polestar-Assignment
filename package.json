@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test-ui": "cucumber-js test frontend/test/features",
+    "test-ui": "npx cucumber-js test frontend/test/features",
     "test-api": "npx playwright test backend/test",
     "test-k6": "k6 run k6/scripts/script.js",
     "test-ui-smoke": "cucumber-js test --tags @Smoke frontend/test/features",

@@ -5,10 +5,12 @@ import HomePage from '../../src/pages/HomePage'
 import CookieActions from '../../utils/CookieActions'
 import NewsSubcribePage from '../../src/pages/NewsSubcribePage'
 import Logger from '../../../utils/LoggingUtils'
-import getwsEndpoint from '../../utils/BrowserStackConfig'
+import getwsEndpointBrowserStack from '../../utils/BrowserStackConfig'
+import getwsEndpointLambdaTest from '../../utils/LambdaTEstConfig'
 
 let page: Page, browser: Browser, context: BrowserContext
 const timestamp = new Date().toISOString().replace(/[:.-]/g, '_')
+var browserPlatform = 'LambdaTest'
 
 BeforeAll(async function () {
     Logger.debug('Before All hook: Starting browser...') 
@@ -16,10 +18,15 @@ BeforeAll(async function () {
         if(process.env.LOCALBROWSER) {
             Logger.debug('Running test in local browser...')
             browser = await chromium.launch({ headless: true, channel: 'chrome' }) 
-        } else {
+        } else if(browserPlatform == 'BrowserStack') {
             Logger.debug('Running test in browserstack browser...')
             browser = await chromium.connect({
-            wsEndpoint: getwsEndpoint()
+            wsEndpoint: getwsEndpointBrowserStack()
+            })
+        } else if(browserPlatform == 'LambdaTest') {
+            Logger.debug('Running test in lambdatest browser...')
+            browser = await chromium.connect({
+                wsEndpoint: getwsEndpointLambdaTest()
             })
         }
     Logger.info('Browser successfully created.')
