@@ -57,14 +57,6 @@ npm test-ui-regression
 
 ![alt text](readme-images/image-7.png)
 
-### Custom Execution in LambdaTest environment
-
-- I have included the utility and feature to execute my test cases in LambdaTest environment.
-- We can execute the test cases in LambdaTest by setting environment variable "LOCALBROWSER" as false.
-- We need to provide "LT_USERNAME" and "LT_ACCESS_KEY" environment values in order to run in LambdaTest.
-
-![alt text](readme-images/image-LT.png)
-
 ### Retry Execution of faied tests
 
 - I have included the retry mechanism to rety the failed test cases in local as well as pipeline
