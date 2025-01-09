@@ -5,8 +5,8 @@ const caps = {
   'browser': 'playwright-chromium',
   'os': 'os x',
   'os_version': 'mojave',
-  'browserstack.username': process.env.BROWSERSTACK_USERNAME || 'prudhvirajmukiri_TCb5Nl',
-  'browserstack.accessKey': process.env.BROWSERSTACK_ACCESS_KEY || 'ra9zGpdpJzV2tobz3PxM',
+  'browserstack.username': process.env.BROWSERSTACK_USERNAME,
+  'browserstack.accessKey': process.env.BROWSERSTACK_ACCESS_KEY,
   'client.playwrightVersion': clientPlaywrightVersion
 };
 
