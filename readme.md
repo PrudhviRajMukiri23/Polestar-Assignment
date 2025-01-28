@@ -22,7 +22,7 @@
 5. configured **gitHub Actions yaml** with artifacts publish feature.
 6. **Reports** and **traces** generated and published in pipeline.
 7. Custom **logging** and **Error handling** were implemented.
-8. Implemented the feature to run test in **browserstack**.
+8. Implemented the feature to run test in **browserstack** and **lambdatest**.
 
 ## Frontend Tests
 
