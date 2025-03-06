@@ -10,6 +10,9 @@ export const options = {
             duration: '30s',
         },
     },
+    thresholds: {
+        iteration_duration: ['avg>3000']
+    }
 };
 
 export function projects() {
